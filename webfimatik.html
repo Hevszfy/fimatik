@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Template Web Paralaks</title>
+<img src="images/Logo fimatik.png" alt="Logo" width="1668" height="2388">
+
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+    background-image: image('Logo fimatik.png');
+  }
+  header {
+    position: relative;
+    height: 100vh;
+    background: url('https://pholystar.github.io/prismatik/assets/bg.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+  }
+  header h1 {
+    font-size: 4em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  }
+  section {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .parallax {
+    height: 500px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  #para1 { background-image: url('https://pholystar.github.io/prismatik/assets/para1.jpg'); }
+  #para2 { background-image: url('https://pholystar.github.io/prismatik/assets/para2.jpg'); }
+  
+  /* Simple fade-in animation */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s forwards;
+  }
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>FIMATIK</h1>
+</header>
+
+<section>
+  <h2 class="fade-in" style="animation-delay: 0.3s;">Tentang Kami</h2>
+  <p class="fade-in" style="animation-delay: 0.6s;">Ini adalah contoh website dengan efek paralaks yang sederhana dan animasi teks yang halus. Kamu bisa mengganti semua teks dan gambar sesuai kebutuhan.</p>
+</section>
+
+<div id="para1" class="parallax"></div>
+
+<section>
+  <h2 class="fade-in" style="animation-delay: 0.3s;">Layanan Kami</h2>
+  <p class="fade-in" style="animation-delay: 0.6s;">Website ini juga dapat diperluas dengan berbagai fitur interaktif menggunakan JavaScript sesuai keinginanmu.</p>
+</section>
+
+<div id="para2" class="parallax"></div>
+
+<section>
+  <h2 class="fade-in" style="animation-delay: 0.3s;">Kontak</h2>
+  <p class="fade-in" style="animation-delay: 0.6s;">Hubungi kami di email@example.com</p>
+</section>
+
+<script>
+  // Simple fade-in on scroll
+  const faders = document.querySelectorAll('.fade-in');
+  const appearOptions = { threshold: 0.1 };
+  
+  const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.style.animationPlayState = 'running';
+      appearOnScroll.unobserve(entry.target);
+    });
+  }, appearOptions);
+
+  faders.forEach(fader => {
+    fader.style.animationPlayState = 'paused';
+    appearOnScroll.observe(fader);
+  });
+</script>
+
+</body>
+</html>
